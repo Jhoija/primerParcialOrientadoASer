@@ -16,3 +16,23 @@ export const postProductoModel = async(nombre, detalle, valor)=>{
         [nombre, detalle, valor]
     )
 }
+
+export const putProductoModel = async(nombre, detalle, valor, id)=>{
+    const pg = new pgService()
+    return await pg.connection.query(
+        `UPDATE producto
+        SET nombre = $1,
+        detalle = $2,
+        valor = $3
+        WHERE id_producto = $4
+        RETURNING *
+        `,
+        [nombre, detalle, valor, id]
+    )
+}
+
+export const deleteProductoModel = async(id)=>{
+    const pg = new pgService()
+    await pg.connection.query(`DELETE FROM producto WHERE id_producto = $1`, [id])
+    return { success: true, message: 'Producto eliminado exitosamente' }
+}

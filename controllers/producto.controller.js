@@ -1,4 +1,4 @@
-import { getProductoModel, postProductoModel } from "../models/producto.model.js"
+import { getProductoModel, postProductoModel, putProductoModel, deleteProductoModel } from "../models/producto.model.js"
 
 
 export const getProducto  = async (req,res) => {
@@ -15,7 +15,28 @@ export const postProducto = async (req,res) => {
         msg: 'esto es un post', data:data
     })
 }
+
+export const putProducto = async (req,res) => {
+    let { detalle, nombre, valor} = req.body
+    let { id } = req.params
+    let data = await putProductoModel(detalle, nombre, valor,id)
+    res.status(200).json({
+        msg: 'esto es un put', data:data
+    })
+}
+
+export const deleteProducto = async (req,res) => {
+    let { id } = req.params
+    console.log(id)
+    let data = await deleteProductoModel(id)
+    res.status(200).json({
+        msg: 'esto es un delete', data:data
+    })
+}
+
 export default {
     getProducto,
-    postProducto
+    postProducto,
+    putProducto,
+    deleteProducto
 }
