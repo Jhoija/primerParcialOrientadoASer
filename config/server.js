@@ -1,14 +1,19 @@
-import express from "express";
-import { env } from "./default.js";
-import route from "../routes/index.routes.js";
+import express from "express"
+import { env } from "./default.js"
+import route from "../routes/index.routes.js"
+import pgService from "../services/pg.service.js"
 export default class Server{
     constructor(){
         this.app  = express()
         this.port = env.port
     }
 
-    connectionDB(){}
-    middlewares(){}
+    connectionDB(){
+        new pgService()
+    }
+    middlewares(){
+        this.app.use(express.json())
+    }
 
     routes(){
         this.app.use(route)
