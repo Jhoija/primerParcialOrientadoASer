@@ -1,6 +1,4 @@
-# Primer Parcial Arquitectura Orientada a Servicios 04/04/2024 
-
-# Integrantes: Sebastian Amaya 191882 - Eduwin Fabian Contreras 191898
+# Primer Parcial Arquitectura Orientada 
 
 ## Descripción 
 
