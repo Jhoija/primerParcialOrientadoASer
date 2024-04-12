@@ -7,6 +7,23 @@ export const getProductoModel = async()=>{
     )
 }
 
+export const getProductoUnicoModel = async(id)=>{
+    const pg = new pgService()
+    console.log(id)
+    return await pg.connection.oneOrNone(
+        `SELECT * FROM PRODUCTO WHERE id_producto = $1`,
+        [id]
+    )
+}
+
+export const getProductoUnicosModel = async(nombre, detalle, valor)=>{
+    const pg = new pgService()
+    return await pg.connection.oneOrNone(
+        `SELECT count(id_producto) FROM PRODUCTO WHERE nombre = $1 AND detalle = $2 AND valor = $3`,
+        [nombre, detalle, valor]
+    )
+}
+
 export const postProductoModel = async(nombre, detalle, valor)=>{
     const pg = new pgService()
     return await pg.connection.one(
